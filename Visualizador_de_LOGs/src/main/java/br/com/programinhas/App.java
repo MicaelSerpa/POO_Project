@@ -8,25 +8,22 @@ public class App {
         String conteudoArquivo = Arquivo.lerArquivo();
 
         // Separa as colunas em vetores
-        separarColunas(conteudoArquivo);
+        int numero_de_linhas = separarColunas(conteudoArquivo);
 
         // Exibe o conteúdo do arquivo em uma caixa de diálogo
+        JOptionPane.showMessageDialog(null, numero_de_linhas);
         JOptionPane.showMessageDialog(null, conteudoArquivo);
 
         for (int i = 0; i < linhas.length; i++) {
             System.out.println("Linha: " + linhas[i] + ", Tempo: " + tempo[i] + ", Distância: " + distancia[i]);
         }
 
-double LINHAS[] = Processo.converterParaDouble(linhas);
-double TEMPO[] = Processo.converterParaDouble(tempo);
-double DISTANCIA[] = Processo.converterParaDouble(tempo);
+        double LINHAS[] = Processo.converterParaDouble(linhas);
+        double TEMPO[] = Processo.converterParaDouble(tempo);
+        double DISTANCIA[] = Processo.converterParaDouble(tempo);
 
 
-
-
-
-
-        LineChart lineChart = new LineChart(LINHAS, TEMPO, DISTANCIA);
+        LineChart lineChart = new LineChart(numero_de_linhas, LINHAS, TEMPO, DISTANCIA);
         lineChart.setVisible(true);
     }
 
@@ -38,7 +35,7 @@ double DISTANCIA[] = Processo.converterParaDouble(tempo);
     
 
     // Método para separar as colunas em vetores
-    public static void separarColunas(String conteudo) {
+    public static int separarColunas(String conteudo) {
         // Divide o conteúdo em linhas, ignorando a última linha que está vazia
         String[] todasLinhas = conteudo.split("\n");
 
@@ -47,8 +44,6 @@ double DISTANCIA[] = Processo.converterParaDouble(tempo);
         linhas = new String[tamanho];
         tempo = new String[tamanho];
         distancia = new String[tamanho];
-
-    
 
         // Preenche os vetores com os valores de cada linha
         for (int i = 1; i < todasLinhas.length; i++) { // Começa de 1 para pular a linha de cabeçalho
@@ -59,28 +54,7 @@ double DISTANCIA[] = Processo.converterParaDouble(tempo);
             distancia[i - 1] = valores[2];
         }
 
-        // Exemplo de como usar os vetores
-//for (int i = 0; i < linhas.length; i++) {
-    //System.out.println("Linha: " + linhas[i] + ", Tempo: " + tempo[i] + ", Distância: " + distancia[i]);
-//}
-
-        
+        return tamanho;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

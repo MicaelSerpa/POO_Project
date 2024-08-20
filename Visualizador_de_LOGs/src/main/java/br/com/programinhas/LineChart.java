@@ -21,12 +21,9 @@ import org.jfree.data.xy.XYSeriesCollection;
 
 public class LineChart extends JFrame {
 
-    public LineChart(double[] vetor1, double[] vetor2, double[] vetor3) {
+    public LineChart(int linhas, double[] vetor1, double[] vetor2, double[] vetor3) {
 
-
-
-
-    XYDataset dataset = createDataset(vetor1, vetor2, vetor3);
+    XYDataset dataset = createDataset(linhas, vetor1, vetor2, vetor3);
     
         JFreeChart chart = createChart(dataset);
 
@@ -43,7 +40,7 @@ public class LineChart extends JFrame {
     private JFreeChart createChart(XYDataset dataset) {
 
         JFreeChart chart = ChartFactory.createXYLineChart(
-                "Comem pão com salame",
+                "Relação tempo x distância",
                 "Tempo (Segundos)",
                 "Distância Percorrida (metros)",
                 dataset,
@@ -77,25 +74,15 @@ public class LineChart extends JFrame {
         return chart;
     }
 
-    private XYDataset createDataset(double[] vetor1_, double[] vetor2_, double[] vetor3_) {
+    private XYDataset createDataset(int linhas, double[] vetor1_, double[] vetor2_, double[] vetor3_) {
         XYSeries serie1 = new XYSeries("Velocidade média");
 
-    
 
+        for(int i = 0; i < linhas; i++){
 
-for(int i = 0; i < 9; i++){
+            serie1.add(vetor2_[i],vetor3_[i]);
 
-    serie1.add(vetor2_[i],vetor3_[i]);
-
-    // serie1.add(1,2);
-    // serie1.add(2,4);
-    // serie1.add(4,8);
-   //  serie1.add(8,16);
-
-}
-
-   
-        
+        }
 
         XYSeriesCollection dataset = new XYSeriesCollection();
         dataset.addSeries(serie1);
